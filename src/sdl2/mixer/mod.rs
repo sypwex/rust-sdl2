@@ -297,7 +297,7 @@ pub trait LoaderRWops<'a> {
     /// Load src for use as a sample.
     fn load_wav(&self) -> Result<Chunk, String>;
 
-    fn load_music(&'a self) -> Result<Music<'a>, String>;
+    fn load_music(&'a self, freesrc: i32) -> Result<Music<'a>, String>;
 }
 
 impl<'a> LoaderRWops<'a> for RWops<'a> {
@@ -315,8 +315,8 @@ impl<'a> LoaderRWops<'a> for RWops<'a> {
     }
 
     /// Load src for use as music.
-    fn load_music(&self) -> Result<Music<'a>, String> {
-        let raw = unsafe { mixer::Mix_LoadMUS_RW(self.raw(), 0) };
+    fn load_music(&self, freesrc: i32) -> Result<Music<'a>, String> {
+        let raw = unsafe { mixer::Mix_LoadMUS_RW(self.raw(), freesrc) };
         if raw.is_null() {
             Err(get_error())
         } else {
