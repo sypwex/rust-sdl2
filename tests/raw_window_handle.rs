@@ -14,7 +14,7 @@ mod raw_window_handle_test {
         let window = new_hidden_window();
         match window.raw_window_handle() {
             RawWindowHandle::Win32(windows_handle) => {
-                assert_ne!(windows_handle.hwnd, 0 as *mut libc::c_void);
+                assert_ne!(windows_handle.hwnd, 0 as *mut std::os::raw::c_void);
                 println!("Successfully received Windows RawWindowHandle!");
             }
             x => assert!(
@@ -50,7 +50,7 @@ mod raw_window_handle_test {
             }
             RawWindowHandle::Wayland(wayland_handle) => {
                 assert_ne!(
-                    wayland_handle.surface, 0 as *mut libc::c_void,
+                    wayland_handle.surface, 0 as *mut std::os::raw::c_void,
                     "Surface for Wayland should not be null"
                 );
                 println!("Successfully received linux Wayland RawWindowHandle!");
@@ -64,13 +64,13 @@ mod raw_window_handle_test {
         match window.raw_display_handle() {
             RawDisplayHandle::Xlib(x11_display) => {
                 assert_ne!(
-                    x11_display.display, 0 as *mut libc::c_void,
+                    x11_display.display, 0 as *mut std::os::raw::c_void,
                     "Display for X11 should not be null"
                 );
             }
             RawDisplayHandle::Wayland(wayland_display) => {
                 assert_ne!(
-                    wayland_display.display, 0 as *mut libc::c_void,
+                    wayland_display.display, 0 as *mut std::os::raw::c_void,
                     "Display for Wayland should not be null"
                 );
             }
@@ -89,11 +89,11 @@ mod raw_window_handle_test {
         match window.raw_window_handle() {
             RawWindowHandle::AppKit(macos_handle) => {
                 assert_ne!(
-                    macos_handle.ns_window, 0 as *mut libc::c_void,
+                    macos_handle.ns_window, 0 as *mut std::os::raw::c_void,
                     "ns_window should not be null"
                 );
                 assert_ne!(
-                    macos_handle.ns_view, 0 as *mut libc::c_void,
+                    macos_handle.ns_view, 0 as *mut std::os::raw::c_void,
                     "nw_view should not be null"
                 );
                 println!("Successfully received macOS RawWindowHandle!");

@@ -22,8 +22,8 @@
 
 use audio::AudioFormatNum;
 use get_error;
-use libc::c_void;
-use libc::{c_double, c_int, c_uint};
+use std::os::raw::c_void;
+use std::os::raw::{c_double, c_int, c_uint};
 use rwops::RWops;
 use std::borrow::ToOwned;
 use std::convert::TryInto;

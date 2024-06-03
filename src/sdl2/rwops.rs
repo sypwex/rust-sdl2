@@ -1,6 +1,7 @@
 use crate::get_error;
-use libc::c_void;
-use libc::{c_char, c_int, size_t};
+use std::os::raw::c_void;
+use std::os::raw::{c_char, c_int};
+use sys::size_t;
 use std::ffi::CString;
 use std::io;
 use std::marker::PhantomData;

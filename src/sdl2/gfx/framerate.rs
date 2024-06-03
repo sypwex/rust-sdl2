@@ -2,7 +2,7 @@
 
 use get_error;
 use libc;
-use libc::{c_void, size_t};
+use std::os::raw::{c_void, size_t};
 use std::mem;
 use sys::gfx;
 
@@ -16,7 +16,7 @@ impl FPSManager {
     pub fn new() -> FPSManager {
         unsafe {
             let size = mem::size_of::<gfx::framerate::FPSmanager>() as size_t;
-            let raw = libc::malloc(size) as *mut gfx::framerate::FPSmanager;
+            let raw = std::os::raw::malloc(size) as *mut gfx::framerate::FPSmanager;
             gfx::framerate::SDL_initFramerate(raw);
             FPSManager { raw: raw }
         }
@@ -51,6 +51,6 @@ impl FPSManager {
 
 impl Drop for FPSManager {
     fn drop(&mut self) {
-        unsafe { libc::free(self.raw as *mut c_void) }
+        unsafe { std::os::raw::free(self.raw as *mut c_void) }
     }
 }

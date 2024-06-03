@@ -52,7 +52,7 @@
 //! std::thread::sleep(Duration::from_millis(2000));
 //! ```
 
-use libc::{c_char, c_int, c_void};
+use std::os::raw::{c_char, c_int, c_void};
 use std::convert::TryFrom;
 use std::ffi::{CStr, CString};
 use std::marker::PhantomData;

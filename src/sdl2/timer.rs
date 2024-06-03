@@ -1,5 +1,5 @@
 use crate::sys;
-use libc::c_void;
+use std::os::raw::c_void;
 use std::marker::PhantomData;
 use std::mem;
 

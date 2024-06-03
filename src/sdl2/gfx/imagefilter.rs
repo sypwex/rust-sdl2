@@ -2,7 +2,7 @@
 
 use c_vec::CVec;
 use get_error;
-use libc::{self, c_int, c_uint, c_void, size_t};
+use std::os::raw::{self, c_int, c_uint, c_void, size_t};
 use std::mem;
 use sys::gfx::imagefilter;
 
@@ -24,8 +24,8 @@ pub fn mmx_on() {
 #[inline]
 fn cvec_with_size(sz: usize) -> CVec<u8> {
     unsafe {
-        let p = libc::malloc(sz as size_t) as *mut u8;
-        CVec::new_with_dtor(p, sz, move |p| libc::free(p as *mut c_void))
+        let p = std::os::raw::malloc(sz as size_t) as *mut u8;
+        CVec::new_with_dtor(p, sz, move |p| std::os::raw::free(p as *mut c_void))
     }
 }
 
